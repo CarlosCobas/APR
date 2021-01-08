@@ -64,6 +64,22 @@ do
 
     % M step: parameter update
     % HERE YOUR CODE FOR PARAMETER ESTIMATION
+	sumz=sum(z);
+	
+	%Probabilidad a priori
+	pkGc{ic}=sumz/Nc;
+	
+	%Calculo de medias
+	mu{ic}=(Xc'*z)./sumz;
+	
+	%Tercer parámetro
+	for k=1:K
+		Xcmu = Xc-mu{ic}(:,k)';
+		matcov = (Xcmu' * (Xcmu.*z(:,k)))/sumz(k);
+		
+		%Suavizado
+		sigma(ic,k) = alpha*matcov+(1-alpha)*eye(D);
+	end
 
   end
 
