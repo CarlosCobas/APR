@@ -2,3 +2,11 @@
 %%Ejecucion de mixgaussian-exp.m (ejercicio 2.2)
  
 ./mixgaussian-exp.m ../data/mnist/train-images-idx3-ubyte.mat.gz ../data/mnist/train-labels-idx1-ubyte.mat.gz "[1]" "[1e-4]" 90 10
+
+Ejecucion pca+mixgaussian-exp.m (modificar parámetros)
+
+./pca+mixgaussian-exp.m ../data/mnist/train-images-idx3-ubyte.mat.gz ../data/mnist/train-labels-idx1-ubyte.mat.gz "[20]" "[1 2 5]" "[1e-4]" 90 10
+
+
+
+

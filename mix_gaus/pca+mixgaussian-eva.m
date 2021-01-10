@@ -1,30 +1,22 @@
 #!/usr/bin/octave -qf
 
-if (nargin!=7)
-printf("Usage: pca+mixgaussian-exp.m <trdata> <trlabels> <pcaKs> <Ks> <alphas> <%%trper> <%%dvper>\n")
+if (nargin!=6)
+printf("Usage: pca+mixgaussian-eva.m <trdata> <trlabs> <tedata> <telabels> <ks> <alphas>\n")
 exit(1);
 end;
 
 arg_list=argv();
 trdata=arg_list{1};
 trlabs=arg_list{2};
-pcaKs=str2num(arg_list{3});
-Ks=str2num(arg_list{4});
-alphas=str2num(arg_list{5});
-trper=str2num(arg_list{6});
-dvper=str2num(arg_list{7});
+tedata=arg_list{3};
+telabs=arg_list{4};
+ks=str2num(arg_list{5});
+alphas=str2num(arg_list{6});
 
 load(trdata);
 load(trlabs);
-
-N=rows(X);
-seed=23; rand("seed",seed); permutation=randperm(N);
-X=X(permutation,:); xl=xl(permutation,:);
-
-Ntr=round(trper/100*N);
-Ndv=round(dvper/100*N);
-Xtr=X(1:Ntr,:); xltr=xl(1:Ntr);
-Xdv=X(N-Ndv+1:N,:); xldv=xl(N-Ndv+1:N);
+load(tedata);
+load(telabs);
 
 
 [m W] = pca(Xtr);
@@ -53,4 +45,4 @@ for i=1:length(alphas)
 end
 
 save_precision(4); 
-save("error_pca+mixgaussian-exp.out", "err_mat");
+save("error_pca+mixgaussian-eva.out", "err_mat");
