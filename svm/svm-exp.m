@@ -43,29 +43,35 @@ for t=1:length(T)
             for d=1:length(D)
 
                 args = char(["-t " , num2str(T(t)), "-c " , num2str(C(c)), "-d " ,num2str(D(d))])
-                res = svmtrain(xl, X, args);
+                res = svmtrain(xltr, Xtr, args);
 
+                predicted_label=svmpredict(xltr,Xtr,res);
+                edv = mean(xltr!=predicted_label)*100;
                 % edv = mixgaussian(pcaXtr,xltr,pcaXdv,xldv,Ks(j),alphas(i));
                 % printf("\n  alpha   PCA    K   dv-err");
                 % printf("\n  -----   ---   ---  ------\n");
                 % printf("  %.1e %3d  %3d  %6.3f\n\n",alphas(i),pcaKs(k),Ks(j),edv);
                 
-                edv = mean(xldv!=cls)*100;
-                err_mat_a=[err_mat_a; T(t),C(c),D(d),edv];
+                
+                err_mat=[err_mat; T(t),C(c),D(d),edv];
+                xltr
             
             end
         else
-            args = char(["-t " , num2str(T(t)), "-c " , num2str(C(c))])
-            res = svmtrain(xl, X, args);
-
-            edv = mean(xldv!=cls)*100;
-            err_mat_a=[err_mat_a;  T(t),C(c),0,edv];
+        
+           args = char(["-t " , num2str(T(t)), "-c " , num2str(C(c))])
+           res = svmtrain(xltr, Xtr, args);
+           predicted_label=svmpredict(xltr,Xtr,res);
+           
+            edv = mean(xltr!=predicted_label)*100;
+            err_mat=[err_mat;  T(t),C(c),0,edv];
+            
         end
 		
 	end
+    err_mat
 
-	err_mat = [err_mat, err_mat_a];
 end
 
 save_precision(4); 
-save("error_pca+mixgaussian-exp.out", "err_mat");
+save("error_svm-exp.out", "err_mat");
