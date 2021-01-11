@@ -164,11 +164,11 @@ set psdir
 set fit brief errorvariables nocovariancevariables errorscaling prescale nowrap v5
 set logscale x
 set xrange [0.9:105]
-set yrange [0:30]
+set yrange [0:15]
 set xtics ("1" 1, "2" 2, "3" 3, "4" 4, "5" 5, "10" 10, "20" 20, "50" 50, "100" 100)
-set ytics ("0" 0, "1" 1, "5" 5, "6" 6, "7" 7, "8" 8, "9" 9, "10" 10, "15" 15, "20" 20, "30" 30)
-set label "Error (%)" at 1,55 left
-set label "C" at 0.8,1.5 right
+set ytics ("1" 1, "5" 5, "6" 6, "7" 7, "8" 8, "9" 9, "10" 10, "15" 15)
+set label "Error (%)" at 1,14 left
+set label "C" at 0.8,-1.5 right
 set label "MNIST MixGaussian ({/Symbol a})=1.0e-05" at 20,55 center font "HelveticaBold,30"
-plot "./outputs/1.0e-05.out" u 2:3 title "1" w lp, "./outputs/1.0e-05.out" u 5:6 title "2" w lp, "./outputs/1.0e-05.out" u 8:9 title "5" w lp, "./outputs/1.0e-05.out" u 11:12 title "10" w lp, "./outputs/1.0e-05.out" u 14:15 title "20" w lp, "./outputs/1.0e-05.out" u 17:18 title "50" w lp, "./outputs/1.0e-05.out" u 20:21 title "100" w lp 
+plot  "./outputs/1.0e-05.out" u 11:12 title "10" w lp, "./outputs/1.0e-05.out" u 14:15 title "20" w lp, "./outputs/1.0e-05.out" u 17:18 title "50" w lp, "./outputs/1.0e-05.out" u 20:21 title "100" w lp 
 #    EOF
