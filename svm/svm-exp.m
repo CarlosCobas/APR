@@ -42,29 +42,18 @@ for t=1:length(T)
 		if(T(t) == 1)
             for d=1:length(D)
 
-                args = char(["-t " , num2str(T(t)), "-c " , num2str(C(c)), "-d " ,num2str(D(d))])
+                args = char(["-t " , num2str(T(t)), " -c " , num2str(C(c)), " -d " ,num2str(D(d))])
                 res = svmtrain(xltr, Xtr, args);
 
-                predicted_label=svmpredict(xltr,Xtr,res);
-                edv = mean(xltr!=predicted_label)*100;
-                % edv = mixgaussian(pcaXtr,xltr,pcaXdv,xldv,Ks(j),alphas(i));
-                % printf("\n  alpha   PCA    K   dv-err");
-                % printf("\n  -----   ---   ---  ------\n");
-                % printf("  %.1e %3d  %3d  %6.3f\n\n",alphas(i),pcaKs(k),Ks(j),edv);
-                
-                
-                err_mat=[err_mat; T(t),C(c),D(d),edv];
-                xltr
-            
+                [predicted_label, accr, dec]=svmpredict(xldv,Xdv,res);
+                err_mat=[err_mat; T(t),C(c),D(d),accr'];
             end
         else
         
-           args = char(["-t " , num2str(T(t)), "-c " , num2str(C(c))])
-           res = svmtrain(xltr, Xtr, args);
-           predicted_label=svmpredict(xltr,Xtr,res);
-           
-            edv = mean(xltr!=predicted_label)*100;
-            err_mat=[err_mat;  T(t),C(c),0,edv];
+            args = char(["-t " , num2str(T(t)), " -c " , num2str(C(c))])
+            res = svmtrain(xltr, Xtr, args);
+            [predicted_label, accr, dec]=svmpredict(xldv,Xdv,res);
+            err_mat=[err_mat; T(t),C(c),D(d),accr'];
             
         end
 		
