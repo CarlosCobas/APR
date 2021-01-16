@@ -35,9 +35,16 @@ for i=1:length(alphas)
 		pcaYr = Yr * W(:,1:pcaKs(k));
 		for j=1:length(Ks)
 			edv = mixgaussian(pcaXr,xl,pcaYr,yl,Ks(j),alphas(i));
+
+			m = edv / 100;
+			s = sqrt(m*(1-m)/rows(pcaXr));
+			r = 1.96 * s;
+
+
 			printf("\n  alpha   PCA    K   dv-err");
 			printf("\n  -----   ---   ---  ------\n");
 			printf("  %.1e %3d  %3d  %6.3f\n\n",alphas(i),pcaKs(k),Ks(j),edv);
+			printf("I=[%.3f, %.3f]\n",m-r,m+r);
 			err_mat_a=[err_mat_a; alphas(i),pcaKs(k),Ks(j),edv];
 		end
 		
@@ -45,6 +52,9 @@ for i=1:length(alphas)
 
 	err_mat = [err_mat, err_mat_a];
 end
+
+
+
 
 save_precision(4); 
 save("error_pca+mixgaussian-eva.out", "err_mat");
