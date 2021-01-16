@@ -22,10 +22,10 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
     predictedLabels = [];
     for c = 1: rows(Yout')
         [value, index] = max(Yout(:,c));
-        predictedLabels = [predictedLabels;index];
+        predictedLabels = [predictedLabels;index-1];
     end
     errY = mean(yl'!=predictedLabels)*100;
-    yl'
+    
 end
 
     

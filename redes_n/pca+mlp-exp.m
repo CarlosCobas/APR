@@ -40,7 +40,8 @@ err_mat= [];
 
 for i=1:length(nHiddens)
 
-  err_mat_a = [];
+  	err_mat_a = [];
+	  
 	for k=1:length(pcaKs)
 		pcaXtr = Xtr * W(:,1:pcaKs(k));
 		pcaXdv = Xdv * W(:,1:pcaKs(k));
