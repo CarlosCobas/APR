@@ -1,23 +1,19 @@
 #!/usr/bin/octave -qf
 addpath("nnet_apr");
-if (nargin!=7)
-printf("Usage: mlp-eva.m <trdata> <trlabels> <tedata> <telabels> <nHiddens> <%%trper> <%%dvper>\n")
+if (nargin!=5)
+printf("Usage: mlp-exp.m <trdata> <trlabels> <nHiddens> <%%trper> <%%dvper>\n")
 exit(1);
 end;
 
 arg_list=argv();
 trdata=arg_list{1};
 trlabs=arg_list{2};
-tedata=arg_list{3};
-telabs=arg_list{4};
-nHiddens=str2num(arg_list{5});
-trper=str2num(arg_list{6});
-dvper=str2num(arg_list{7});
+nHiddens=str2num(arg_list{3});
+trper=str2num(arg_list{4});
+dvper=str2num(arg_list{5});
 
 load(trdata);
 load(trlabs);
-load(tedata);
-load(telabs);
 
 N=rows(X);
 seed=23; rand("seed",seed); permutation=randperm(N);
@@ -34,10 +30,12 @@ printf("\n--- ------\n");
 show=10;
 epochs=300;
 err_mat= [];
+
 for i=1:length(nHiddens)
-  edv = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHiddens(i),epochs,show,seed);
+  edv = mlp(Xtr,xltr,Xdv,xldv,Xdv,xldv,nHiddens(i),epochs,show,seed);
   printf("%3d %6.3f\n",nHiddens(i),edv);
   err_mat=[err_mat; edv];
 end
+
 save_precision(4); 
-save("error_mlp-eva.out", "err_mat");
+save("error_mlp-exp.out", "err_mat");

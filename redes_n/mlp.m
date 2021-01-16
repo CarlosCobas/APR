@@ -1,7 +1,6 @@
 function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
     Xtr = Xtr'; xltr=xltr'; Xdv=Xdv'; xldv=xldv'; Y=Y'; yl=yl';
-
-    yl = onehot(yl);
+    
     [Xtrnorm,Xtrmean,Xtrstd] = prestd(Xtr);
     XdvNN.P = trastd(Xdv,Xtrmean,Xtrstd);
     XdvNN.T = onehot(xldv);
@@ -25,8 +24,8 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
         [value, index] = max(Yout(:,c));
         predictedLabels = [predictedLabels;index];
     end
-    errY = mean(xldv'!=predictedLabels)*100;
-    predictedLabels
+    errY = mean(yl'!=predictedLabels)*100;
+    yl'
 end
 
     
