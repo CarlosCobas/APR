@@ -25,7 +25,7 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
         predictedLabels = [predictedLabels;index];
     end
     errY = mean(yl'!=predictedLabels)*100;
-    yl'
+    
 end
 
     
