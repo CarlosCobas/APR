@@ -2,12 +2,14 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
     Xtr = Xtr'; xltr=xltr'; Xdv=Xdv'; xldv=xldv'; Y=Y'; yl=yl';
 
     yl = onehot(yl);
-    xltr = onehot(xltr);
     [Xtrnorm,Xtrmean,Xtrstd] = prestd(Xtr);
     XdvNN.P = trastd(Xdv,Xtrmean,Xtrstd);
     XdvNN.T = onehot(xldv);
     
-    initNN = newff(minmax(Xtrnorm),[nHidden 10], {"tansig","logsig"},"trainlm","","mse");
+    classes=unique(yl);
+    C=length(classes);
+
+    initNN = newff(minmax(Xtrnorm),[nHidden C], {"tansig","logsig"},"trainlm","","mse");
     
     initNN.trainParam.show = show;
     initNN.trainParam.epochs = epochs;  
@@ -17,7 +19,7 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
 
     Ynorm = trastd(Y,Xtrmean,Xtrstd);
     Yout = sim(NN,Ynorm);
-    
+
     predictedLabels = [];
     for c = 1: rows(Yout')
         [value, index] = max(Yout(:,c));
