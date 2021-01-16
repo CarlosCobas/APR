@@ -1,0 +1,10 @@
+# Created by Octave 5.2.0, Fri Jan 15 20:59:33 2021 CET <carloscobas@pop-os>
+# name: err_mat
+# type: matrix
+# rows: 3
+# columns: 6
+ 1 10 1 91.88 1.283 0.8521
+ 1 10 2 98.05 0.3073 0.9633
+ 1 10 3 97.88 0.3382 0.9596
+
+
