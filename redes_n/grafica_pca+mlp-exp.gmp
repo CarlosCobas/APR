@@ -162,13 +162,13 @@ set loadpath
 set fontpath 
 set psdir
 set fit brief errorvariables nocovariancevariables errorscaling prescale nowrap v5
-set logscale x
-set xrange [0.9:105]
-set yrange [0:15]
-set xtics ("1" 1, "2" 2, "3" 3, "4" 4, "5" 5, "10" 10, "20" 20, "50" 50, "100" 100)
-set ytics ("1" 1, "5" 5, "6" 6, "7" 7, "8" 8, "9" 9, "10" 10, "15" 15)
-set label "Error (%)" at 1,14 left
-set label "C" at 0.8,-1.5 right
-set label "MNIST MixGaussian ({/Symbol a})=1.0e-05" at 20,55 center font "HelveticaBold,30"
-plot  "pca5.out" u 1:2 title "10" w lp, "./outputs/1.0e-05.out" u 14:15 title "20" w lp, "./outputs/1.0e-05.out" u 17:18 title "50" w lp, "./outputs/1.0e-05.out" u 20:21 title "100" w lp 
+
+set xrange [0:50]
+set yrange [0:40]
+set xtics ("0" 0, "5" 5, "10" 10, "15" 15, "20" 20, "25" 25, "30" 30, "35" 35, "40" 40, "45" 45)
+set ytics ("0" 0, "5" 5, "10" 10, "15" 15, "20" 20, "25" 25, "30" 30, "35" 35)
+set label "Error (%)" at 1,38 left
+set label "N" at 50,-2 right
+set label "MNIST RNM" at 30,20 center font "HelveticaBold,20"
+plot  "./output/pca5.out" u 1:3 title "PCA=5" w lp, "./output/pca10.out" u 1:3 title "PCA=10" w lp, "./output/pca20.out" u 1:3 title "PCA=20" w lp, "./output/pca30.out" u 1:3 title "PCA=30" w lp 
 #    EOF
