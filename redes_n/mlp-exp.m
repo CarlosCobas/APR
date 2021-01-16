@@ -1,5 +1,5 @@
 #!/usr/bin/octave -qf
-
+addpath("nnet_apr");
 if (nargin!=5)
 printf("Usage: mlp-exp.m <trdata> <trlabels> <nHiddens> <%%trper> <%%dvper>\n")
 exit(1);
