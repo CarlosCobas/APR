@@ -37,7 +37,7 @@ for i=1:length(alphas)
 			edv = mixgaussian(pcaXr,xl,pcaYr,yl,Ks(j),alphas(i));
 
 			m = edv / 100;
-			s = sqrt(m*(1-m)/rows(pcaXr));
+			s = sqrt(m*(1-m)/rows(pcaYr));
 			r = 1.96 * s;
 
 

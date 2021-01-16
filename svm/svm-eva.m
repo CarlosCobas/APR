@@ -41,6 +41,13 @@ for t=1:length(T)
 
                 [predicted_label, accr, dec]=svmpredict(yl,Y,res);
                 err_mat=[err_mat; T(t),C(c),D(d),accr'];
+
+                edv = 100 - accr'(1);
+
+                m = edv / 100;
+                s = sqrt(m*(1-m)/rows(Y));
+                r = 1.96 * s;
+                printf("I=[%.3f, %.3f]\n",m-r,m+r);
             end
         else
         
@@ -49,6 +56,12 @@ for t=1:length(T)
             [predicted_label, accr, dec]=svmpredict(yl,Y,res);
             err_mat=[err_mat; T(t),C(c),D(d),accr'];
             
+            edv = 100 - accr'(1);
+
+            m = edv / 100;
+			s = sqrt(m*(1-m)/rows(Y));
+			r = 1.96 * s;
+            printf("I=[%.3f, %.3f]\n",m-r,m+r);
         end
 		
 	end
