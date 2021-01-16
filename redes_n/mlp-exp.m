@@ -34,7 +34,7 @@ err_mat= [];
 for i=1:length(nHiddens)
   edv = mlp(Xtr,xltr,Xdv,xldv,Xdv,xldv,nHiddens(i),epochs,show,seed);
   printf("%3d %6.3f\n",nHiddens(i),edv);
-  err_mat=[err_mat; edv nHiddens(i)];
+  err_mat=[err_mat; edv];
 end
 
 save_precision(4); 

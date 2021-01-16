@@ -19,14 +19,14 @@ function [errY] = mlp(Xtr,xltr,Xdv,xldv,Y,yl,nHidden,epochs,show,seed)
 
     Ynorm = trastd(Y,Xtrmean,Xtrstd);
     Yout = sim(NN,Ynorm);
-
+    
     predictedLabels = [];
     for c = 1: rows(Yout')
         [value, index] = max(Yout(:,c));
-        predictedLabels = [predictedLabels;index-1];
+        predictedLabels = [predictedLabels;index];
     end
-    errY = mean(xldv!=predictedLabels)*100;
-
+    errY = mean(xldv'!=predictedLabels)*100;
+    predictedLabels
 end
 
     
